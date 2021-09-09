@@ -5,18 +5,17 @@ body {
 
 .main {
   background-color: #4945459f;
+  max-width: 100%;
 
   .search {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
     padding: 1rem;
 
-    .search__inputs {
-      align-self: flex-start;
-      max-width: 45rem;
-      width: 100%;
+    &__inputs {
+      flex-grow: 1;
       height: 100%;
 
       .inputs {
@@ -44,16 +43,17 @@ body {
         }
 
         #search-btn {
+          align-self: center;
           width: 8rem;
           height: 3rem;
-          align-self: center;
         }
       }
 
       .city-weather-data {
         display: flex;
-        justify-content: space-between;
-        padding: 2rem;
+        justify-content: space-around;
+        padding: 2rem 0.5rem 2rem;
+        margin: auto;
 
         &__name {
           align-self: center;
@@ -62,41 +62,41 @@ body {
         &__info {
           display: flex;
           max-width: 50rem;
-          gap: 2rem;
+          gap: 1rem;
           text-align: right;
 
           .weather-icon {
             height: 5rem;
           }
         }
+
+        .info {
+          font-weight: bold;
+          font-size: 1.5rem;
+        }
       }
     }
 
     .default-cities {
+      flex-grow: 1;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       flex-wrap: wrap;
       gap: 1rem;
-      max-width: 30rem;
-      width: 100%;
 
       .default-city {
-        height: 5rem;
-        background-color: #1a1818c2;
+        flex: 1 0 18rem;
+        height: auto;
+        background-color: #555050c2;
         color: white;
 
         &-weather-data {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: 2rem;
         }
       }
     }
   }
-}
-
-.info {
-  font-weight: bold;
-  font-size: 1.5rem;
 }

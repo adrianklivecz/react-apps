@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       fontSize: "30px",
       color: "white",
-      backgroundColor: "darkMagenta",
+      backgroundColor: "darkSlateGrey",
     },
   },
 }));

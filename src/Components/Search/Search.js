@@ -7,6 +7,7 @@ const baseUrl = "https://api.openweathermap.org/data/2.5/weather";
 
 export const Search = () => {
   const [cityName, setCityName] = useState("");
+  const [countryName, setCountryName] = useState("");
   const [clicked, setClicked] = useState(false);
   const [cityData, setCityData] = useState("");
   const [defaultFirstCityData, setDefaultFirstCityData] = useState("");
@@ -14,27 +15,31 @@ export const Search = () => {
 
   useEffect(() => {
     if (clicked) {
-      fetch(`${baseUrl}?q=${cityName}&units=metric&appid=${apiKey}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setCityData(data);
-          console.log(data);
-          return data;
-        });
+      const test = setTimeout(() => {
+        fetch(
+          `${baseUrl}?q=${cityName}${
+            countryName ? `,${countryName}` : ""
+          }&units=metric&appid=${apiKey}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setCityData(data);
+            return data;
+          });
+      }, 100);
 
       return () => {
         setClicked(false);
-        setCityData("");
+        clearTimeout(test);
       };
     }
-  }, [cityName, clicked]);
+  }, [cityName, clicked, countryName]);
 
   useEffect(() => {
     fetch(`${baseUrl}?q=Barcelona&units=metric&appid=${apiKey}`)
       .then((res) => res.json())
       .then((data) => {
         setDefaultFirstCityData(data);
-        console.log(data);
         return data;
       });
   }, []);
@@ -44,7 +49,6 @@ export const Search = () => {
       .then((res) => res.json())
       .then((data) => {
         setDefaultSecondCityData(data);
-        console.log(data);
         return data;
       });
   }, []);
@@ -59,7 +63,6 @@ export const Search = () => {
                 className="input"
                 id="filled-basic"
                 label="City"
-                // value=""
                 variant="filled"
                 onChange={(e) => setCityName(e.target.value)}
               />
@@ -68,6 +71,7 @@ export const Search = () => {
                 id="filled-basic"
                 label="Country"
                 variant="filled"
+                onChange={(e) => setCountryName(e.target.value)}
               />
             </form>
             <Button
@@ -95,10 +99,10 @@ export const Search = () => {
                 <div>
                   <span className="info">
                     {" "}
-                    {Math.floor(cityData.main.temp)}&#8451;
+                    {Math.round(cityData.main.temp)}&#8451;
                   </span>{" "}
                   <p>
-                    feels like {Math.floor(cityData.main.feels_like)}&#8451;
+                    feels like {Math.round(cityData.main.feels_like)}&#8451;
                   </p>
                   <p>{cityData.weather[0].description}</p>
                 </div>
@@ -109,8 +113,8 @@ export const Search = () => {
           )}
         </Card>
         <div className="default-cities">
-          <Card>
-            <CardContent className="default-city">
+          <Card className="default-city">
+            <CardContent>
               {" "}
               {defaultFirstCityData ? (
                 <div className="inputs default-city-weather-data">
@@ -129,7 +133,7 @@ export const Search = () => {
                     <div>
                       <span>
                         {" "}
-                        {Math.floor(defaultFirstCityData.main.temp)}&#8451;
+                        {Math.round(defaultFirstCityData.main.temp)}&#8451;
                       </span>{" "}
                     </div>
                   </div>
@@ -139,8 +143,8 @@ export const Search = () => {
               )}
             </CardContent>
           </Card>
-          <Card>
-            <CardContent className="default-city">
+          <Card className="default-city">
+            <CardContent>
               {" "}
               {defaultSecondCityData ? (
                 <div className="inputs default-city-weather-data">
@@ -159,7 +163,7 @@ export const Search = () => {
                     <div>
                       <span>
                         {" "}
-                        {Math.floor(defaultSecondCityData.main.temp)}&#8451;
+                        {Math.round(defaultSecondCityData.main.temp)}&#8451;
                       </span>{" "}
                     </div>
                   </div>
