@@ -1,0 +1,18 @@
+.app-list {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+
+  .list__item {
+    padding: 1rem;
+    color: white;
+
+    .item__icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .disabled * {
+    color: grey;
+  }
+}

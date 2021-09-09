@@ -3,10 +3,31 @@
   height: 100vh;
   margin: auto;
 
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  ul,
+  li {
+    list-style-type: none;
+  }
+
   .container {
-    padding-top: 2rem;
+    padding-top: 1rem;
     margin: auto;
     max-width: 80rem;
     width: 100%;
+
+    .header {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .react-logo {
+        height: 4rem;
+      }
+    }
   }
 }

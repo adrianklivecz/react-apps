@@ -2,20 +2,29 @@ import "./App.scss";
 import { Header } from "./Components/Header/Header";
 import { Search } from "./Components/Search/Search";
 import { Homepage } from "./Components/Homepage/Homepage";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import reactLogo from "../src/Components/Homepage/react-icon.png";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 function App() {
   return (
     <div className="app-container">
       <div className="container">
         <Router>
-          <Route path="/weathered">
-            <Header />
-            <Search />
-          </Route>
-          <Route path="/">
-            <Homepage />
-          </Route>
+          <Link to="/">
+            <header className="header">
+              <img className="react-logo" alt="" src={reactLogo} />
+              <h1>React Apps</h1>
+            </header>
+          </Link>
+          <Switch>
+            <Route path="/weathered">
+              <Header />
+              <Search />
+            </Route>
+            <Route path="/">
+              <Homepage />
+            </Route>
+          </Switch>
         </Router>
       </div>
     </div>
