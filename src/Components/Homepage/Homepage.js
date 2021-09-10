@@ -1,10 +1,10 @@
 import { Button, ButtonGroup } from "@material-ui/core";
-import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import React from "react";
-import "./Homepage.scss";
 import { Link } from "react-router-dom";
+import "./Homepage.scss";
 
 export const Homepage = () => {
   return (

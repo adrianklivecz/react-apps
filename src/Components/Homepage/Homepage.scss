@@ -6,6 +6,11 @@
   .list__item {
     padding: 1rem;
     color: white;
+    transition: transform 250ms;
+
+    &:hover {
+      transform: translateY(-10px);
+    }
 
     .item__link {
       display: flex;
