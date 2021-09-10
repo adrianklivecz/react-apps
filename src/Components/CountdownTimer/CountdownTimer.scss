@@ -6,13 +6,15 @@
     align-items: center;
     gap: 0.5rem;
     width: 20rem;
-    margin: 0 auto 3rem;
+    margin: 0 auto 1.5rem;
     font-size: 1.3rem;
   }
 
   .countdown__inputs {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 2rem;
     width: 100%s;
@@ -27,4 +29,11 @@
       }
     }
   }
+}
+
+.test {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
