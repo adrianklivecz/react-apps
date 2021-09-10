@@ -15,12 +15,16 @@ export const Homepage = () => {
         aria-label="text primary button group"
       >
         <Button className="list__item">
-          <Link to="/weathered">
-            <WbSunnyIcon className="item__icon" /> Weather App
+          <Link to="/weathered" className="item__link">
+            <WbSunnyIcon className="item__icon" />
+            <p>Weather App</p>
           </Link>
         </Button>
         <Button className="list__item">
-          <AccessAlarmIcon className="item__icon" /> Countdown App
+          <Link to="/countdown-timer" className="item__link">
+            <AccessAlarmIcon className="item__icon" />
+            <p>Countdown App</p>
+          </Link>
         </Button>
         <Button className="list__item disabled" disabled>
           <HourglassEmptyIcon className="item__icon" /> More coming soon...

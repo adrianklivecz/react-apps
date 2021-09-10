@@ -4,6 +4,7 @@ import { Search } from "./Components/Search/Search";
 import { Homepage } from "./Components/Homepage/Homepage";
 import reactLogo from "../src/Components/Homepage/react-icon.png";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { CountdownTimer } from "./Components/CountdownTimer/CountdownTimer";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
             <Route path="/weathered">
               <Header />
               <Search />
+            </Route>
+            <Route path="/countdown-timer">
+              <CountdownTimer />
             </Route>
             <Route path="/">
               <Homepage />

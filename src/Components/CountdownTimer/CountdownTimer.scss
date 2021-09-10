@@ -1,0 +1,46 @@
+.countdown {
+  .countdown__title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: 20rem;
+    margin: 0 auto 3rem;
+    font-size: 1.3rem;
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      content: "";
+      background: lightgray;
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        lightgray 50%,
+        transparent 100%
+      );
+    }
+  }
+
+  .countdown__inputs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%s;
+
+    .input-field {
+      width: 20rem;
+      background-color: lightgray;
+      border-radius: 0.5rem;
+
+      label {
+        font-style: italic;
+      }
+    }
+  }
+}

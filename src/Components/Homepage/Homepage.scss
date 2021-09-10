@@ -7,11 +7,15 @@
     padding: 1rem;
     color: white;
 
+    .item__link {
+      display: flex;
+      align-items: center;
+    }
+
     .item__icon {
       margin-right: 0.5rem;
     }
   }
-
   .disabled * {
     color: grey;
   }
