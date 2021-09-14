@@ -1,4 +1,4 @@
-import { Button, TextField } from "@material-ui/core";
+import { Button, Card, TextField } from "@material-ui/core";
 import TimerIcon from "@material-ui/icons/Timer";
 import React, { useEffect, useState } from "react";
 import "./CountdownTimer.scss";
@@ -15,19 +15,27 @@ export const CountdownTimer = () => {
   const [newEventDate, setNewEventDate] = useState(null);
   const [presentTime, setPresentTime] = useState(null);
   const [remainingTime, setRemainingTime] = useState(null);
+  const [remainingDays, setRemainingDays] = useState(null);
+  const [remainingHours, setRemainingHours] = useState(null);
+  const [remainingMinutes, setRemainingMinutes] = useState(null);
+  const [remainingSeconds, setRemainingSeconds] = useState(null);
 
   useEffect(() => {
-    if (startCountdown) {
-      setPresentTime(new Date().getTime());
+    const t = setInterval(() => {
       setNewEventDate(new Date(`${eventDate + eventTime}`).getTime());
-      setRemainingTime(Number(newEventDate) - Number(presentTime));
-    }
-    console.log("newEvent:", newEventDate, typeof newEventDate);
-    console.log("presentTime:", presentTime);
-    console.log("remainingTime:", remainingTime);
+      setPresentTime(new Date().getTime());
+      setRemainingTime(newEventDate - presentTime);
+      setRemainingDays(Math.floor(remainingTime / daysToMs));
+      setRemainingHours(Math.floor((remainingTime % daysToMs) / hoursToMs));
+      setRemainingMinutes(
+        Math.floor((remainingTime % hoursToMs) / minutesToMs)
+      );
+      setRemainingSeconds(Math.floor((remainingTime % minutesToMs) / 1000));
+    }, 1000);
 
     return () => {
       setStartCountdown(false);
+      clearInterval(t);
     };
   }, [
     eventDate,
@@ -44,8 +52,8 @@ export const CountdownTimer = () => {
         <TimerIcon className="item__icon" />
         <p>Countdown Timer</p>
       </div>
-      <div className="test">
-        <form className="countdown__inputs">
+      <div className="countdown__inputs">
+        <form className="inputs">
           <TextField
             className="input-field"
             id="filled-basic"
@@ -89,6 +97,31 @@ export const CountdownTimer = () => {
           Start
         </Button>
       </div>
+      {remainingTime ? (
+        <Card className="countdown__event">
+          <p className="event-name">{eventName.toUpperCase()} Countdown:</p>
+          <div className="event">
+            <div class="event-details">
+              <p class="time-left">{remainingDays} </p>
+              <p>days</p>
+            </div>
+            <div class="event-details">
+              <p class="time-left">{remainingHours}</p>
+              <p>hours</p>
+            </div>
+            <div class="event-details">
+              <p class="time-left">{remainingMinutes}</p>
+              <p>minutes</p>
+            </div>
+            <div class="event-details">
+              <p class="time-left">{remainingSeconds}</p>
+              <p>seconds</p>
+            </div>
+          </div>
+        </Card>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

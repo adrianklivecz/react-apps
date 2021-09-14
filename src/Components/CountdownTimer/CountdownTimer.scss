@@ -1,39 +1,73 @@
 .countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
   .countdown__title {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
     width: 20rem;
-    margin: 0 auto 1.5rem;
     font-size: 1.3rem;
   }
 
   .countdown__inputs {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 2rem;
-    width: 100%s;
 
-    .input-field {
-      width: 20rem;
-      background-color: lightgray;
-      border-radius: 0.5rem;
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      width: 100%s;
 
-      label {
-        font-style: italic;
+      .input-field {
+        width: 20rem;
+        border-radius: 0.5rem;
+        background-color: lightgray;
+
+        label {
+          font-style: italic;
+        }
       }
     }
   }
-}
 
-.test {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
+  .countdown__event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding: 1rem;
+    background-color: #424242;
+
+    .event-name {
+      font-size: 1.7rem;
+      color: darkgray;
+    }
+
+    .event {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+      color: white;
+
+      .time-left {
+        padding-bottom: 1rem;
+        margin: 0;
+        border-bottom: 1px solid lightgray;
+        font-size: 3rem;
+        text-align: center;
+      }
+    }
+  }
 }
