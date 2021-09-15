@@ -101,20 +101,20 @@ export const CountdownTimer = () => {
         <Card className="countdown__event">
           <p className="event-name">{eventName.toUpperCase()} Countdown:</p>
           <div className="event">
-            <div class="event-details">
-              <p class="time-left">{remainingDays} </p>
+            <div className="event-details">
+              <p className="time-left">{remainingDays} </p>
               <p>days</p>
             </div>
-            <div class="event-details">
-              <p class="time-left">{remainingHours}</p>
+            <div className="event-details">
+              <p className="time-left">{remainingHours}</p>
               <p>hours</p>
             </div>
-            <div class="event-details">
-              <p class="time-left">{remainingMinutes}</p>
+            <div className="event-details">
+              <p className="time-left">{remainingMinutes}</p>
               <p>minutes</p>
             </div>
-            <div class="event-details">
-              <p class="time-left">{remainingSeconds}</p>
+            <div className="event-details">
+              <p className="time-left">{remainingSeconds}</p>
               <p>seconds</p>
             </div>
           </div>
