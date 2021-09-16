@@ -8,43 +8,64 @@ const hoursToMs = 1000 * 60 * 60;
 const minutesToMs = 1000 * 60;
 
 export const CountdownTimer = () => {
+  const [eventData, setEventData] = useState({});
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
   const [startCountdown, setStartCountdown] = useState(false);
-  const [newEventDate, setNewEventDate] = useState(null);
-  const [presentTime, setPresentTime] = useState(null);
   const [remainingTime, setRemainingTime] = useState(null);
-  const [remainingDays, setRemainingDays] = useState(null);
-  const [remainingHours, setRemainingHours] = useState(null);
-  const [remainingMinutes, setRemainingMinutes] = useState(null);
-  const [remainingSeconds, setRemainingSeconds] = useState(null);
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setNewEventDate(new Date(`${eventDate + eventTime}`).getTime());
-      setPresentTime(new Date().getTime());
-      setRemainingTime(newEventDate - presentTime);
-      setRemainingDays(Math.floor(remainingTime / daysToMs));
-      setRemainingHours(Math.floor((remainingTime % daysToMs) / hoursToMs));
-      setRemainingMinutes(
-        Math.floor((remainingTime % hoursToMs) / minutesToMs)
-      );
-      setRemainingSeconds(Math.floor((remainingTime % minutesToMs) / 1000));
-    }, 1000);
+    console.log("startCountdown", startCountdown);
+    let t;
+    if (!startCountdown) {
+      setEventData({});
+      setRemainingTime(null);
+    } else if (eventData?.eventName) {
+      t = setInterval(() => {
+        const newEventDate = new Date(`${eventDate + eventTime}`).getTime();
+        const presentTime = new Date().getTime();
+        setRemainingTime(newEventDate - presentTime);
+
+        setEventData({
+          ...eventData,
+          ...{
+            remainingDays: Math.floor(remainingTime / daysToMs),
+            remainingHours: Math.floor((remainingTime % daysToMs) / hoursToMs),
+            remainingMinutes: Math.floor(
+              (remainingTime % hoursToMs) / minutesToMs
+            ),
+            remainingSeconds: Math.floor((remainingTime % minutesToMs) / 1000),
+            remainingTime,
+          },
+        });
+      }, 500);
+    } else {
+      t = setInterval(() => {
+        const newEventDate = new Date(`${eventDate + eventTime}`).getTime();
+        const presentTime = new Date().getTime();
+        setRemainingTime(newEventDate - presentTime);
+
+        setEventData({
+          eventName,
+          remainingDays: Math.floor(remainingTime / daysToMs),
+          remainingHours: Math.floor((remainingTime % daysToMs) / hoursToMs),
+          remainingMinutes: Math.floor(
+            (remainingTime % hoursToMs) / minutesToMs
+          ),
+          remainingSeconds: Math.floor((remainingTime % minutesToMs) / 1000),
+          remainingTime,
+        });
+      }, 0);
+    }
 
     return () => {
-      setStartCountdown(false);
-      clearInterval(t);
+      if (t) {
+        clearInterval(t);
+      }
     };
-  }, [
-    eventDate,
-    eventTime,
-    newEventDate,
-    presentTime,
-    remainingTime,
-    startCountdown,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remainingTime, startCountdown]);
 
   return (
     <div className="countdown">
@@ -89,38 +110,42 @@ export const CountdownTimer = () => {
         </form>
         <Button
           variant="contained"
-          color="primary"
+          color={startCountdown ? "secondary" : "primary"}
           onClick={() =>
-            eventName && eventDate ? setStartCountdown(true) : null
+            eventName && eventDate ? setStartCountdown(!startCountdown) : null
           }
         >
-          Start
+          {startCountdown ? "Stop" : "Start"}
         </Button>
       </div>
-      {remainingTime ? (
+      {eventData.remainingTime > 0 ? (
         <Card className="countdown__event">
-          <p className="event-name">{eventName.toUpperCase()} Countdown:</p>
+          <p className="event-name">
+            {eventData?.eventName?.toUpperCase()} Countdown:
+          </p>
           <div className="event">
             <div className="event-details">
-              <p className="time-left">{remainingDays} </p>
+              <p className="time-left">{eventData?.remainingDays}</p>
               <p>days</p>
             </div>
             <div className="event-details">
-              <p className="time-left">{remainingHours}</p>
+              <p className="time-left">{eventData?.remainingHours}</p>
               <p>hours</p>
             </div>
             <div className="event-details">
-              <p className="time-left">{remainingMinutes}</p>
+              <p className="time-left">{eventData?.remainingMinutes}</p>
               <p>minutes</p>
             </div>
             <div className="event-details">
-              <p className="time-left">{remainingSeconds}</p>
+              <p className="time-left">{eventData?.remainingSeconds}</p>
               <p>seconds</p>
             </div>
           </div>
         </Card>
       ) : (
-        ""
+        <Card className="countdown__event">
+          <p className="event-name">Time's up!</p>
+        </Card>
       )}
     </div>
   );
